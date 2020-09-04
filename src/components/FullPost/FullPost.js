@@ -6,12 +6,12 @@ class FullPost extends Component {
     state = { post: null }
     componentDidUpdate(prevProps, prevState) {
         if (this.props.id && prevProps.id != this.props.id)
-            axios.get('https://jsonplaceholder.typicode.com/posts/' + this.props.id)
+            axios.get('/posts/' + this.props.id)
                 .then(response => this.setState({ post: response.data }))
     }
 
     del_post = async () => {
-        let response = await axios.delete('https://jsonplaceholder.typicode.com/posts/' + this.props.id)
+        let response = await axios.delete('/posts/' + this.props.id)
         console.log(response);
     }
 
