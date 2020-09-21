@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 // import axios from 'axios'
 import axios from '../../axios' // could use another name   
-import Post from '../../components/Post/Post';
-import FullPost from '../../components/FullPost/FullPost';
-import NewPost from '../../components/NewPost/NewPost';
-import './Blog.css';
-import post from '../../components/Post/Post';
+// import Post from '../../components/Post/Post';
+// import FullPost from './FullPost/FullPost';
+// import NewPost from './NewPost/NewPost';
+import classes  from'./Blog.module.css';
+import Posts from './Posts/Posts';
 
 class Blog extends Component {
 
@@ -14,44 +14,39 @@ class Blog extends Component {
     }
     state = { posts: [], selected_post_id: null, err: false }
     componentDidMount() {
-        axios.get('/posts')
-            .then((response) => {
-                const posts = response.data.slice(0, 4);
-                const updated_posts = posts.map((post, index) => { return { ...post, author: 'author_' + index } })
-                // console.log(updated_posts);
-                this.setState({ posts: updated_posts });
-                // console.log(response);
-            })
-            .catch(() => {
-                this.setState({ err: true });
-            })
+       
 
 
     }
-    on_post_click = (id) => {
-        this.setState({ selected_post_id: id })
-    }
+  
 
     render() {
-        let posts = <p>somthng is wrong</p>
-        if (!this.state.err)
-            posts = this.state.posts.map((post, index) =>
-                <Post
-                    on_post_click={(id) => this.on_post_click(post.id)}
-                    key={post.id}
-                    post={post}></Post>
-            )
+      
         return (
-            <div>
-                <section className="Posts">
-                    {posts}
-                </section>
-                <section>
+            <div >
+                <header className={classes.Blog}>
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href='/home'>
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href='/post'>
+                                    New Post
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </header>
+             <Posts></Posts>
+                {/* <section>
                     <FullPost id={this.state.selected_post_id} />
                 </section>
                 <section>
                     <NewPost />
-                </section>
+                </section> */}
             </div>
         );
     }
