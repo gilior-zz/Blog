@@ -9,6 +9,11 @@ class NewPost extends Component {
         author: 'Max'
     }
 
+    componentDidMount() {
+            console.log(this.props);
+    }
+    
+
     on_add_post = async () => {
         const new_post = {
             title: this.state.title,
