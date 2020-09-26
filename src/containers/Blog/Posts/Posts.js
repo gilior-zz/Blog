@@ -5,6 +5,7 @@ import classes from './Posts.module.css'
 import { Link } from "react-router-dom";
 import { render } from 'react-dom';
 class Posts extends Component {
+
     state = {
         posts: [],
         selected_post_id: null,
@@ -32,17 +33,24 @@ class Posts extends Component {
 
     on_post_click = (id) => {
         //    this.sets selected_post_id_update(id)
-        this.setState({ selected_post_id: id })
+        // this.setState({ selected_post_id: id })
+        this.props.history.push(
+            {
+                pathname:'/'+id
+            }
+        )
     }
 
     render() {
         let _posts = <p>somthng is wrong</p>
         if (!this.state.err)
             _posts = this.state.posts.map((post, index) =>
-                <Link key={post.id} to={'/'+post.id}>
-                    <Post
-                        post={post}></Post>
-                </Link>
+                // <Link key={post.id} to={'/'+post.id}>
+                <Post
+                    key={post.id}
+                    on_post_click={(id) => this.on_post_click(id)}
+                    post={post}></Post>
+                // </Link>
             )
 
         return (

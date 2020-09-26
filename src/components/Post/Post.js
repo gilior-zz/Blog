@@ -6,7 +6,7 @@ const post = (props) =>
     {
       console.log(props);  
         return (
-              <article onClick={props.on_post_click} className="Post">
+              <article onClick={()=>props.on_post_click(props.post.id)} className="Post">
         <h1>{props.post.title}</h1>
         <div className="Info">
             <div className="Author">{props.post.author}</div>
