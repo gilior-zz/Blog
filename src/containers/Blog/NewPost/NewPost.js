@@ -4,8 +4,8 @@ import './NewPost.css';
 import { Redirect } from "react-router-dom";
 class NewPost extends Component {
     state = {
-        title: '',
-        content: '',
+        title: 'jhjhj',
+        content: 'jhjhjh',
         author: 'Max',
         submitted: false
     }
@@ -23,7 +23,8 @@ class NewPost extends Component {
         }
         let response = await axios.post('/posts', new_post);
         console.log(response);
-        this.setState({ submitted: true })
+        // this.setState({ submitted: true })
+        this.props.history.push('/posts')
 
     }
     render() {
