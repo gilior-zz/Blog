@@ -30,8 +30,8 @@ class Blog extends Component {
 
                             <li>
 
-                                <NavLink exact to='/'>
-                                    Home
+                                <NavLink activeStyle={{ color: "orange" }}  exact to='/'>
+                                    Posts
                                 </NavLink>
                             </li>
                             <li>
