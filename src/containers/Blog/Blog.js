@@ -6,13 +6,13 @@ import axios from '../../axios' // could use another name
 import NewPost from './NewPost/NewPost';
 import classes from './Blog.module.css';
 import Posts from './Posts/Posts';
-import { Route, Link, NavLink, Switch,Redirect } from 'react-router-dom'
+import { Route, Link, NavLink, Switch, Redirect } from 'react-router-dom'
 class Blog extends Component {
 
     constructor(props) {
         super(props);
     }
-    state = { posts: [], selected_post_id: null, err: false }
+    state = { posts: [], selected_post_id: null, err: false, auth: false }
     componentDidMount() {
 
 
@@ -30,7 +30,7 @@ class Blog extends Component {
 
                             <li>
 
-                                <NavLink activeStyle={{ color: "orange" }}  exact to='/posts'>
+                                <NavLink activeStyle={{ color: "orange" }} exact to='/posts'>
                                     Posts
                                 </NavLink>
                             </li>
@@ -62,12 +62,13 @@ class Blog extends Component {
                 {/* <Route path="/" exact render={()=><h1>home</h1>}></Route>
              <Route path="/"  render={()=><h1>home 2</h1>}></Route> */}
                 <Switch>
-                    <Route path="/new-post" component={NewPost}></Route>
-                    <Route path="/posts"  component={Posts}></Route>
-                    <Redirect from="/"  to='/posts'></Redirect>
+                    {this.state.auth ? <Route path="/new-post" component={NewPost}></Route> : null}
+                    <Route path="/posts" component={Posts}></Route>
+                    <Redirect from="/" to='/posts'></Redirect>
 
                     {/* <Route path="/new-post-2" render={() => <h1>new-post-2</h1>}></Route> */}
                     {/* <Route path="/:id" exact component={FullPost}></Route> */}
+                    
                 </Switch>
                 {/* <section>
                     <FullPost id={this.state.selected_post_id} />
