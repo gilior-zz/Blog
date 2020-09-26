@@ -6,7 +6,7 @@ import axios from '../../axios' // could use another name
 import NewPost from './NewPost/NewPost';
 import classes from './Blog.module.css';
 import Posts from './Posts/Posts';
-import { Route, Link, NavLink, Switch } from 'react-router-dom'
+import { Route, Link, NavLink, Switch,Redirect } from 'react-router-dom'
 class Blog extends Component {
 
     constructor(props) {
@@ -64,6 +64,7 @@ class Blog extends Component {
                 <Switch>
                     <Route path="/new-post" component={NewPost}></Route>
                     <Route path="/posts"  component={Posts}></Route>
+                    <Redirect from="/"  to='/posts'></Redirect>
 
                     {/* <Route path="/new-post-2" render={() => <h1>new-post-2</h1>}></Route> */}
                     {/* <Route path="/:id" exact component={FullPost}></Route> */}
