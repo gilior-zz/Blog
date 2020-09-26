@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 // import axios from 'axios'
 import axios from '../../axios' // could use another name   
-import Post from '../../components/Post/Post';
-import FullPost from './FullPost/FullPost';
+// import Post from '../../components/Post/Post';
+// import FullPost from './FullPost/FullPost';
 import NewPost from './NewPost/NewPost';
 import classes from './Blog.module.css';
 import Posts from './Posts/Posts';
@@ -30,7 +30,7 @@ class Blog extends Component {
 
                             <li>
 
-                                <NavLink activeStyle={{ color: "orange" }}  exact to='/'>
+                                <NavLink activeStyle={{ color: "orange" }}  exact to='/posts'>
                                     Posts
                                 </NavLink>
                             </li>
@@ -62,11 +62,11 @@ class Blog extends Component {
                 {/* <Route path="/" exact render={()=><h1>home</h1>}></Route>
              <Route path="/"  render={()=><h1>home 2</h1>}></Route> */}
                 <Switch>
-                    <Route path="/" exact component={Posts}></Route>
                     <Route path="/new-post" component={NewPost}></Route>
-                    <Route path="/new-post-2" render={() => <h1>new-post-2</h1>}></Route>
-                    <Route path="/:id" exact component={FullPost}></Route>
-                    <Route ></Route>
+                    <Route path="/posts"  component={Posts}></Route>
+
+                    {/* <Route path="/new-post-2" render={() => <h1>new-post-2</h1>}></Route> */}
+                    {/* <Route path="/:id" exact component={FullPost}></Route> */}
                 </Switch>
                 {/* <section>
                     <FullPost id={this.state.selected_post_id} />
