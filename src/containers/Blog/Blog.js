@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 // import axios from 'axios'
 import axios from '../../axios' // could use another name   
 // import Post from '../../components/Post/Post';
@@ -7,9 +7,12 @@ import NewPost from './NewPost/NewPost';
 import classes from './Blog.module.css';
 import Posts from './Posts/Posts';
 import { Route, Link, NavLink, Switch, Redirect } from 'react-router-dom'
-import {func} from "../../hoc/async-component";
+import { func } from "../../hoc/async-component";
 
-const AsyncNewPost=func(()=>{return import('./NewPost/NewPost')})
+const AsyncNewPost = func(() => { return import('./NewPost/NewPost') })
+
+//now with react lazy load...
+const LasyNewPosts = React.lazy(() => import('./NewPost/NewPost'))
 class Blog extends Component {
 
     constructor(props) {
@@ -66,13 +69,27 @@ class Blog extends Component {
              <Route path="/"  render={()=><h1>home 2</h1>}></Route> */}
                 <Switch>
                     {/* {this.state.auth ? <Route path="/new-post" component={NewPost}></Route> : null} */}
-                    {this.state.auth ? <Route path="/new-post" component={func(()=>{return import('./NewPost/NewPost')})}></Route> : null}
+                    {/* {this.state.auth ? <Route path="/new-post" component={AsyncNewPost}></Route> : null} */}
+                    {/* {this.state.auth ? <Route path="/new-post" component={func(()=>{return import('./NewPost/NewPost')})}></Route> : null} */}
+                    {this.state.auth ?
+                        <Route
+                            path="/new-post"
+                            render={() =>
+                                (
+                                    <Suspense fallback={<div>loading...</div>}>
+                                        <LasyNewPosts></LasyNewPosts>
+                                    </Suspense>
+                                )
+                            }
+                        >
+                        </Route>
+                        : null}
                     <Route path="/posts" component={Posts}></Route>
                     {/* <Redirect from="/" to='/posts'></Redirect> */}
 
                     {/* <Route path="/new-post-2" render={() => <h1>new-post-2</h1>}></Route> */}
                     {/* <Route path="/:id" exact component={FullPost}></Route> */}
-                    <Route render={()=><h1>area 51 ahead</h1>}></Route>
+                    <Route render={() => <h1>area 51 ahead</h1>}></Route>
                 </Switch>
                 {/* <section>
                     <FullPost id={this.state.selected_post_id} />
